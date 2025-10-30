@@ -6,7 +6,6 @@ from backend.app.models.master import Master
 from backend.app.extensions import db
 from datetime import datetime
 
-DATE_FORMAT = "%Y-%m-%d"
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
@@ -15,10 +14,6 @@ def register():
     try:
         data = request.get_json()
         role = data.get('role')
-
-        required_fields = ['first_name', 'last_name', 'phone_number', 'email', 'password']
-        if not all(field in data for field in required_fields):
-            pass
 
         if role not in ['client', 'master']:
             return jsonify({"error": "Invalid role. Must be 'client' or 'master'"}), 400
@@ -30,7 +25,7 @@ def register():
             role=role,
             first_name=data.get('first_name'),
             last_name=data.get('last_name'),
-            date_of_birth=datetime.strptime(data.get('date_of_birth'), DATE_FORMAT),
+            date_of_birth=datetime.strptime(data.get('date_of_birth'), "%Y-%m-%d"),
             phone_number=data.get('phone_number'),
             email=data.get('email')
         )

@@ -77,13 +77,7 @@ def delete_master(master_id):
     master = Master.query.get_or_404(master_id)
     user = User.query.get(master.user_id)
 
-    print(f"Attempting to delete master ID: {master_id} and user ID: {master.user_id}")
-
     try:
-        related_bookings = Booking.query.filter_by(master_id=master_id).all()
-        if related_bookings:
-            print(f"Warning: Deleting master with {len(related_bookings)} associated bookings.")
-
         db.session.delete(master)
         if user:
             db.session.delete(user)

@@ -25,7 +25,6 @@ def get_service(service_id):
             db.session.query(Master, User)
             .join(User, Master.user_id == User.id)
             .filter(Master.service_id == service.id)
-            .order_by(User.last_name)
             .all()
         )
 

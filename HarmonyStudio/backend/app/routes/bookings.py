@@ -6,7 +6,6 @@ from backend.app.models.booking import Booking
 from backend.app.extensions import db
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm.attributes import flag_modified
-import datetime
 
 bookings_bp = Blueprint('bookings', __name__, url_prefix='/bookings')
 
@@ -28,13 +27,6 @@ def create_booking():
     """Create a new booking and remove a time from the free list"""
     data = request.get_json()
     booking_datetime_str = data.get('booking_datetime')
-
-    try:
-        booking_time = datetime.datetime.strptime(booking_datetime_str, "%Y-%m-%d %H:%M")
-        if booking_time < datetime.datetime.now():
-            return jsonify({"error": "Cannot book a time in the past."}), 400
-    except ValueError:
-        pass
 
     try:
         user = User.query.get(data.get('user_id'))
