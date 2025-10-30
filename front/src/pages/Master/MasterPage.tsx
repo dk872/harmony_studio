@@ -53,7 +53,6 @@ const MasterPage: React.FC = () => {
 
   const handleNextWeek = () => {
     setStartDate(addDays(startDate, 7));
-    console.log("Next week button clicked");
   };
 
   const handlePrevWeek = () => {

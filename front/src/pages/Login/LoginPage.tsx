@@ -66,7 +66,7 @@ const LoginPage: React.FC = () => {
         placeholder="Email"
         name="email"
         value={formData.email}
-        onChange={(e) => handleInputChange(e)}
+        onChange={handleInputChange}
       />
       <Input
         type="password"

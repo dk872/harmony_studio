@@ -136,6 +136,8 @@ const RegisterPage: React.FC = () => {
     };
 
     const handleRegister = async () => {
+        if (loading) return;
+        
         const payload = { ...formData };
         if (payload.role === "client") {
             delete payload.service_id;

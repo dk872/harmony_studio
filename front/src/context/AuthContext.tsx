@@ -38,7 +38,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     localStorage.setItem("role", role);
-    console.log("User role updated:", role);
   }, [role]);
 
   useEffect(() => {

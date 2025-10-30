@@ -64,11 +64,6 @@ export const MasterImageContainer = styled.div`
   border: 4px solid #6c9a76; /* Green border */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
-  &:hover {
-    transform: scale(1.02);
-    background-color: #f00; /* Debug color accidentally left */
-  }
-
   img {
     width: 100%;
     height: 100%;
