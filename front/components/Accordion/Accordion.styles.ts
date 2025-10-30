@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 
 export const AccordionContainer = styled.div`
-  max-width: 800px; margin: 20px auto; background-color: var(--secondary);
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: var(--secondary);
 `;
 
 export const AccordionItem = styled.div`
-border-radius: 16px; margin: 10px 0; overflow: hidden; background-color: var(--secondary);
+  border-radius: 16px;
+  margin: 10px 0;
+  overflow: hidden;
+  background-color: var(--secondary);
 `;
 
 export const AccordionHeader = styled.button`

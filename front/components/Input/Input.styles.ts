@@ -8,7 +8,17 @@ export const InputContainer = styled.div<{ width?: string }>`
 `;
 
 export const StyledInput = styled.input`
-width: 100%; padding: 16px; font-size: 16px; font-family: 'Montserrat', sans-serif; font-weight: 400; border: 2px solid var(--accent); border-radius: 16px; outline: none; background-color: var(--main); color: var(--accent); z-index: 1;
+  width: 100%;
+  padding: 16px;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  border: 2px solid var(--accent);
+  border-radius: 16px;
+  outline: none;
+  background-color: var(--main);
+  color: var(--accent);
+  z-index: 1;
 
   &:focus + label {
     color: var(--accent); /* Change placeholder color on focus */

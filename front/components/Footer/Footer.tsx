@@ -1,3 +1,4 @@
+// Footer.tsx
 import React from 'react';
 import {
   FooterContainer,
@@ -9,7 +10,7 @@ import {
   FooterCopyright,
   A,
 } from './Footer.styles';
-import { FaFacebook, FaInstagram, FaTelegram, FaLinkedin, FaYoutube } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaTelegram, FaLinkedin } from 'react-icons/fa';
 
 const Footer: React.FC = () => {
   return (
@@ -18,7 +19,7 @@ const Footer: React.FC = () => {
         <FooterContacts>
           <h3>Contacts</h3>
           <a
-            href="tel:+380932872580"
+            href='tel:+380932872580'
             style={{ color: 'var(--main)', textDecoration: 'none' }}
           >
             +38 (093) 287-25-80
