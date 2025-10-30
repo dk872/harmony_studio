@@ -1,0 +1,61 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: var(--main);
+  overflow-x: hidden;
+  background-color: var(--main);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --main: #F9F6F6;
+  --main-rgba: 249 246 246;
+  --secondary: #E6E6E8;
+  --grey: #535852;
+  --grey-rgba: 83, 88, 82;
+  --accent: #017826;
+  --secondary-accent: #014224;
+  --yellow: #ECB93A;
+  --red: #B52A01;
+}
+
+@font-face {
+  font-family: 'MonteCarlo';
+  src: url('./fonts/MonteCarlo/MonteCarlo-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./fonts/Montserrat/static/Montserrat-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./fonts/Montserrat/static/Montserrat-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./fonts/Montserrat/static/Montserrat-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./fonts/Montserrat/static/Montserrat-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
