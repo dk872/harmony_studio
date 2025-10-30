@@ -7,4 +7,3 @@ class Config:
     SQLALCHEMY_DATABASE_URI = 'mysql://root:root@localhost/harmony_studio'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'your_secret_key'
-    DEBUG = True
