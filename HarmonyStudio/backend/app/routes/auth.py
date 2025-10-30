@@ -1,0 +1,104 @@
+from flask import Blueprint, request, jsonify
+from backend.app.models.user import User
+from backend.app.models.client import Client
+from backend.app.models.service import Service
+from backend.app.models.master import Master
+from backend.app.extensions import db
+from datetime import datetime
+
+auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
+
+
+@auth_bp.route('/register', methods=['POST'])
+def register():
+    try:
+        data = request.get_json()
+        role = data.get('role')
+
+        if role not in ['client', 'master']:
+            return jsonify({"error": "Invalid role. Must be 'client' or 'master'"}), 400
+
+        if User.query.filter_by(email=data.get('email')).first():
+            return jsonify({"error": "Email already exists"}), 400
+
+        new_user = User(
+            role=role,
+            first_name=data.get('first_name'),
+            last_name=data.get('last_name'),
+            date_of_birth=datetime.strptime(data.get('date_of_birth'), "%Y-%m-%d"),
+            phone_number=data.get('phone_number'),
+            email=data.get('email')
+        )
+        new_user.set_password(data.get('password'))
+
+        db.session.add(new_user)
+        db.session.commit()
+
+        if role == 'client':
+            new_client = Client(id=new_user.id)
+            db.session.add(new_client)
+        elif role == 'master':
+            service_id = data.get('service_id')
+            bio = data.get('bio', '')
+
+            if not service_id:
+                return jsonify({"error": "Service ID is required for master"}), 400
+
+            service = Service.query.get(service_id)
+            if not service:
+                return jsonify({"error": "Service not found"}), 404
+
+            new_master = Master(
+                user_id=new_user.id,
+                service_id=service_id,
+                bio=bio,
+                speciality=service.name,
+                profile_image_url="https://placehold.co/100x100/ccc/fff?text=Photo"
+            )
+            db.session.add(new_master)
+
+        db.session.commit()
+        return jsonify({
+            "message": f"{role.capitalize()} registered successfully",
+            "user_id": new_user.id,
+            "role": new_user.role
+        }), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": "An error occurred", "details": str(e)}), 500
+
+
+@auth_bp.route('/login', methods=['POST'])
+def login():
+    try:
+        data = request.get_json()
+        email = data.get('email')
+        password = data.get('password')
+        user = User.query.filter_by(email=email).first()
+        if user and user.check_password(password):
+            if user.role == 'admin':
+                return jsonify({
+                    "message": "Welcome to the admin panel",
+                    "redirect": "/admin",
+                    "user": user.to_dict()
+                }), 200
+            elif user.role == 'client':
+                return jsonify({
+                    "message": "Welcome to the client dashboard",
+                    "redirect": "/client-dashboard",
+                    "user": user.to_dict()
+                }), 200
+            elif user.role == 'master':
+                master = Master.query.filter_by(user_id=user.id).first()
+                if not master:
+                    return jsonify({"error": "Master details not found"}), 404
+                return jsonify({
+                    "message": "Welcome to the master dashboard",
+                    "redirect": "/master-dashboard",
+                    "user": user.to_dict(),
+                    "master_details": master.to_dict()
+                }), 200
+        else:
+            return jsonify({"error": "Invalid email or password"}), 401
+    except Exception as e:
+        return jsonify({"error": "An error occurred", "details": str(e)}), 500
