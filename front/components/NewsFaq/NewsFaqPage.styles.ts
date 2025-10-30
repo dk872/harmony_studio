@@ -6,7 +6,6 @@ export const NewsFaqContainer = styled.div`
   padding: 20px;
   text-align: center;
   background-color: var(--secondary);
-  background-color: var(--secondary);
 
   h2 {
     font-family: 'Montserrat', cursive;
